@@ -14,28 +14,12 @@ class MainCanvas:UIView{
     var color = UIColor(named: "black")!.cgColor
     var lineWidth = 3
     
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        
-
-        lines.forEach{ (line) in
-            
-            for (i,p) in line.enumerated(){
-                
-                if i == 0 {
-                    context.move(to: p)
-                }
-                else {
-                    context.addLine(to: p)
-//                    context.addQuadCurve(to: p, control: line[i-1])
-                }
-            }
-        }
-        
-
+    
+        paintLines(context)
         context.setStrokeColor(color)
         context.setLineWidth(CGFloat(lineWidth))
         context.setLineCap(.round)
@@ -56,6 +40,23 @@ class MainCanvas:UIView{
         lines.append(lastLine)
         
         setNeedsDisplay()
+    }
+    
+    
+    fileprivate func paintLines(_ context: CGContext) {
+        lines.forEach{ (line) in
+            
+            for (i,p) in line.enumerated(){
+                
+                if i == 0 {
+                    context.move(to: p)
+                }
+                else {
+                    context.addLine(to: p)
+                 // context.addQuadCurve(to: p, control: line[i-1])
+                }
+            }
+        }
     }
     
     
