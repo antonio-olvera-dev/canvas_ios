@@ -9,12 +9,13 @@ import Foundation
 
 
 
-class MainCanvasController {
-
+class MainCanvasController:MainCanvas {
+    
 
     func cleanView() {
 
-
+        lines.removeAll()
+        setNeedsDisplay()
     }
 
     

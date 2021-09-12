@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var bgSignature: UIImageView!
     
-    var canvas: MainCanvas?
+    var canvas: MainCanvasController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +26,19 @@ class ViewController: UIViewController {
         
         btSave.layer.cornerRadius = 12
         
-        canvas = MainCanvas()
+        canvas = MainCanvasController()
             
         
         container.addSubview(canvas!)
         canvas!.frame = container.bounds
         canvas!.backgroundColor = UIColor(named: "transparent")
-
-        
+    
+//        var tt = canvas?.controller.parseToJpeg()
         
     }
     
     @IBAction func pressBtSave(_ sender: UIButton) {
-        
+        canvas?.cleanView()
     }
     
 }

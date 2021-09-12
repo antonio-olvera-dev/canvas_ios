@@ -14,6 +14,7 @@ class MainCanvas:UIView{
     var color = UIColor(named: "black")!.cgColor
     var lineWidth = 3
     
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -34,7 +35,7 @@ class MainCanvas:UIView{
             }
         }
         
-        
+
         context.setStrokeColor(color)
         context.setLineWidth(CGFloat(lineWidth))
         context.setLineCap(.round)
