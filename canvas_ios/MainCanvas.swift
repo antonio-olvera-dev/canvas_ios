@@ -10,22 +10,52 @@ import UIKit
 
 class MainCanvas:UIView{
     
+    var lines = [[CGPoint]]()
+    var color = UIColor(named: "black")!.cgColor
+    var lineWidth = 3
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-        let startPoint = CGPoint(x: 0, y: 0)
-        let endtPoint = CGPoint(x: 100, y: 100)
+
+        lines.forEach{ (line) in
+            
+            for (i,p) in line.enumerated(){
+                
+                if i == 0 {
+                    context.move(to: p)
+                }
+                else {
+                    context.addLine(to: p)
+//                    context.addQuadCurve(to: p, control: line[i-1])
+                }
+            }
+        }
         
-        context.move(to: startPoint)
-        context.addLine(to: endtPoint)
         
+        context.setStrokeColor(color)
+        context.setLineWidth(CGFloat(lineWidth))
+        context.setLineCap(.round)
         context.strokePath()
-        
     }
     
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        lines.append([CGPoint]())
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        guard let point = touches.first?.location(in: nil) else { return }
+        guard var lastLine = lines.popLast() else { return }
+        
+        lastLine.append(point)
+        lines.append(lastLine)
+        
+        setNeedsDisplay()
+    }
     
     
 }

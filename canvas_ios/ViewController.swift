@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         
         container.addSubview(canvas!)
         canvas!.frame = container.bounds
-        canvas!.backgroundColor = .red
+        canvas!.backgroundColor = UIColor(named: "transparent")
 
         
         
