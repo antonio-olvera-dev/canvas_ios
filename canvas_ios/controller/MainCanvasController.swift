@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 
@@ -19,10 +20,13 @@ class MainCanvasController:MainCanvas {
     }
 
     
-    func parseToJpeg() -> String {
+    func parseToBase64() -> String {
 
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        let image:UIImage = renderer.image { rendererContext in layer.render(in: rendererContext.cgContext) }
+        let imagePng = image.pngData()
 
-        return "Base64.encodeToString(byteArray, Base64.DEFAULT)"
+        return imagePng?.base64EncodedString() ?? ""
     }
 
 

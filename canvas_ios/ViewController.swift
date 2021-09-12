@@ -36,6 +36,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressBtSave(_ sender: UIButton) {
+       
+        let imageToBase64 = canvas?.parseToBase64()
+        print(imageToBase64)
         canvas?.cleanView()
     }
     
